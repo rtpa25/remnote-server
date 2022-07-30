@@ -14,6 +14,8 @@ import { connect } from './utils/connect';
 
 //@routers
 import userRouter from './routes/user.router';
+import pagesRouter from './routes/pages.router';
+import remRouter from './routes/rem.router';
 
 initSuperTokens();
 
@@ -43,8 +45,10 @@ app.get('/', (_, res) => {
 });
 
 app.use('/users', userRouter);
+app.use('/pages', pagesRouter);
+app.use('/rems', remRouter);
 
-// Add this AFTER all your routes
+//AFTER all routes
 app.use(errorHandler());
 
 app.listen(port, async () => {
