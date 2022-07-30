@@ -1,23 +1,34 @@
 {
-  "name": "expressjs",
+  "name": "remnote-server",
   "private": true,
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "Jake Runzer",
+  "main": "index.ts",
+  "author": "Ronit Panda",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "dev:rail": "railway run yarn dev"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.4.6",
+    "pino": "^8.3.0",
+    "pino-pretty": "^8.1.0",
+    "supertokens-node": "^11.0.1",
+    "zod": "^3.17.9"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.11",
     "@types/node": "^14.14.22",
+    "@types/cors": "^2.8.12",
+    "@types/lodash": "^4.14.182",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
