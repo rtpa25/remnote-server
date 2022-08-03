@@ -2,7 +2,7 @@ import { Document, Schema, model, Types } from 'mongoose';
 
 export interface PageDocument extends Document {
   name: string;
-  body: Types.ObjectId[];
+  body: string;
   createdAt: Date;
   updatedAt: Date;
   user: Types.ObjectId;
@@ -11,13 +11,7 @@ export interface PageDocument extends Document {
 const pageSchema = new Schema(
   {
     name: { type: String, required: true },
-    body: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Rem',
-        default: [],
-      },
-    ],
+    body: { type: String, required: true },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

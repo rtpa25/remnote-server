@@ -2,11 +2,13 @@ import { ThirdPartyInfo, UserDocument, UserModel } from '../models/user.model';
 
 export async function createUser(
   email: string,
+  name: string,
   supertokensId: string,
   thirdParty?: ThirdPartyInfo
 ): Promise<UserDocument> {
   const user = await UserModel.create({
     email,
+    name,
     supertokensId,
     thirdParty,
   });

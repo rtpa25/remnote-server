@@ -1,14 +1,15 @@
 import { PageModel } from '../models/page.model';
 
-export async function createPage(name: string, userId: string) {
+export async function createPage(name: string, userId: string, body: string) {
   const page = await PageModel.create({
     name,
     user: userId,
+    body,
   });
   return page;
 }
 
-export async function updatePage(pageId: string, name: string, body: string[]) {
+export async function updatePage(pageId: string, name: string, body: string) {
   const page = await PageModel.findByIdAndUpdate(pageId, { name, body });
   return page;
 }

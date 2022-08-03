@@ -2,6 +2,7 @@ import { Document, Schema, model } from 'mongoose';
 
 export interface UserDocument extends Document {
   email: string;
+  name: string;
   supertokensId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -16,6 +17,7 @@ export interface ThirdPartyInfo {
 const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     supertokensId: { type: String, required: true, unique: true },
     thirdParty: {
       id: { type: String, required: false },

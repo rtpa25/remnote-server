@@ -17,8 +17,8 @@ export async function createPageHandler(
   req: Request<{}, {}, CreatePageInput>,
   res: Response
 ) {
-  const { name, userId } = req.body;
-  const page = await createPage(name, userId);
+  const { name, userId, body } = req.body;
+  const page = await createPage(name, userId, body);
   res.status(201).send(page);
 }
 

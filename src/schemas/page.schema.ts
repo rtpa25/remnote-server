@@ -8,6 +8,9 @@ export const createPageSchema = object({
     userId: string({
       required_error: 'userId is required',
     }),
+    body: string({
+      required_error: 'body is required',
+    }),
   }),
 });
 

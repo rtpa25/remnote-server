@@ -3,6 +3,7 @@ import supertokens, { deleteUser } from 'supertokens-node';
 import ThirdPartyEmailPassword from 'supertokens-node/recipe/thirdpartyemailpassword';
 import { createUser, getUserBySupertokensId } from '../services/user.service';
 import { __isProd__ } from './isProd';
+import axios from 'axios';
 let { Google } = ThirdPartyEmailPassword;
 
 export const initSuperTokens = () => {
@@ -34,6 +35,7 @@ export const initSuperTokens = () => {
             clientId:
               '1060725074195-kmeum4crr01uirfl2op9kd5acmi9jutn.apps.googleusercontent.com',
             clientSecret: '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',
+            scope: ['https://www.googleapis.com/auth/userinfo.profile'],
           }),
         ],
         override: {
@@ -58,7 +60,19 @@ export const initSuperTokens = () => {
                   if (response.status === 'OK') {
                     // TODO: some post sign up logic
                     const user = response.user;
-                    await createUser(user.email, user.id, user.thirdParty);
+                    const username = input.formFields.map((field) => {
+                      if (field.id === 'name') {
+                        return field.value;
+                      } else {
+                        return 'name'; //should not come here
+                      }
+                    })[0];
+                    await createUser(
+                      user.email,
+                      username,
+                      user.id,
+                      user.thirdParty
+                    );
                   }
                 } catch (error) {
                   //user not created in mongoDB while it is in supertokens db so need to delete the user from supertokens db
@@ -86,10 +100,24 @@ export const initSuperTokens = () => {
                 try {
                   if (response.status === 'OK') {
                     //should check if the loggedIn User is in our db
+                    const accessToken = response.authCodeResponse.access_token;
+                    const { data } = await axios.get(`
+                      https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}
+                    `);
+
+                    const username = data.name;
+
                     const user = response.user;
+
                     const fetchedUser = await getUserBySupertokensId(user.id);
+
                     if (!fetchedUser) {
-                      await createUser(user.email, user.id, user.thirdParty);
+                      await createUser(
+                        user.email,
+                        username,
+                        user.id,
+                        user.thirdParty
+                      );
                     }
                   }
                 } catch (error) {
@@ -101,6 +129,13 @@ export const initSuperTokens = () => {
               },
             };
           },
+        },
+        signUpFeature: {
+          formFields: [
+            {
+              id: 'name',
+            },
+          ],
         },
       }),
       Session.init(), // initializes session features
