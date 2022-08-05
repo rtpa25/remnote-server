@@ -20,10 +20,10 @@ export const initSuperTokens = () => {
     appInfo: {
       appName: 'remnote',
       apiDomain: __isProd__
-        ? 'https://api.learnify.site'
+        ? 'https://api.remnote.site'
         : 'http://localhost:8080',
       websiteDomain: __isProd__
-        ? 'https://learnify.site'
+        ? 'https://remnote.site'
         : 'http://localhost:3000',
       apiBasePath: '/auth',
       websiteBasePath: '/auth',
