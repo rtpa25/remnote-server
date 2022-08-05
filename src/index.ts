@@ -32,12 +32,15 @@ app.use(
 
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: [
+      'http://localhost:3000',
+      'https://www.remnote.site',
+      'https://remnote.site',
+    ],
     allowedHeaders: ['content-type', ...getAllCORSHeaders()],
     credentials: true,
   })
 );
-
 app.use(middleware());
 
 app.get('/', (_, res) => {
