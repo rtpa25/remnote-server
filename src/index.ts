@@ -17,6 +17,7 @@ import userRouter from './routes/user.router';
 import pagesRouter from './routes/pages.router';
 import remRouter from './routes/rem.router';
 
+//@initate superokens
 initSuperTokens();
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(
   })
 );
 
+//@cors
 app.use(
   cors({
     origin: [
@@ -41,6 +43,8 @@ app.use(
     credentials: true,
   })
 );
+
+//@auth-routes
 app.use(middleware());
 
 app.get('/', (_, res) => {
