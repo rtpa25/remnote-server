@@ -60,13 +60,8 @@ export const initSuperTokens = () => {
                   if (response.status === 'OK') {
                     // TODO: some post sign up logic
                     const user = response.user;
-                    const username = input.formFields.map((field) => {
-                      if (field.id === 'name') {
-                        return field.value;
-                      } else {
-                        return 'name'; //should not come here
-                      }
-                    })[0];
+
+                    const username = input.formFields[2].value;
                     await createUser(
                       user.email,
                       username,
